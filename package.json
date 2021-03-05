@@ -1,0 +1,23 @@
+{
+  "name": "web_application",
+  "version": "1.0.0",
+  "description": "Web application example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RutarAndriy/Web_Application.git"
+  },
+  "author": "RutarAndriy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RutarAndriy/Web_Application/issues"
+  },
+  "homepage": "https://github.com/RutarAndriy/Web_Application#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-gh-pages": "^0.5.4"
+  }
+}
