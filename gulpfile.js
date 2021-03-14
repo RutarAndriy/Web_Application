@@ -1,5 +1,4 @@
 const { src, dest, series } = require("gulp");
-const gh_pages = require("gulp-gh-pages");
 
 // Обробляємо html файли
 function html() {
@@ -14,16 +13,7 @@ function img() {
           .pipe(dest("build/"));               // Переміщуємо у папку build/
 }
 
-// Завантаження зібраного проекту на сервер
-function deploy_to_gh() {
-    return src('build/**/*') // Беремо усі файли із папки build/
-          .pipe(gh_pages()); // Заливаємо їх на віддалений сервер 
-}
-
 // Збирання проекту
 exports.build = series(html, img);
-
-// Відправка проекту на github
-exports.deploy = series(html, img, deploy_to_gh);
 
 
