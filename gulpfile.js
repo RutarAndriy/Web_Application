@@ -15,7 +15,7 @@ function img() {
 }
 
 // Завантаження зібраного проекту на сервер
-function deploy() {
+function deploy_to_gh() {
     return src('build/**/*') // Беремо усі файли із папки build/
           .pipe(gh_pages()); // Заливаємо їх на віддалений сервер 
 }
@@ -24,6 +24,6 @@ function deploy() {
 exports.build = series(html, img);
 
 // Відправка проекту на github
-exports.deploy = series(html, img, deploy);
+exports.deploy = series(html, img, deploy_to_gh);
 
 
