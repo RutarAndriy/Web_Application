@@ -1,5 +1,5 @@
 // Вибір препроцесора для css - sass, less або scss
-const use_preprocessor = "cscc";
+const use_preprocessor = "scss";
 // Залежно від вибраного препроцесора css використовуємо відповідний модуль
 // gulp-sass - для sass та scss
 // gulp-less - для less
