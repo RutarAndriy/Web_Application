@@ -39,6 +39,41 @@ function only_small_letter (element) {
   element.value = element.value.toLowerCase();
 }
 
+// Перевірка правильності заповнення форм вводу
+function btn_register_press() {
+  // Шукаємо поля вводу по їх id
+  let login  = document.getElementById("login");
+  let pass_a = document.getElementById("password_a");
+  let pass_b = document.getElementById("password_b");
+  // Отримуємо значення полів вводу
+  let text_log   = login.value;
+  let text_pas_a = pass_a.value;
+  let text_pas_b = pass_b.value;
+  // Перевірка заповнення поля #login
+  if (!text_log) { alert("Ви не ввели логін!");
+                   return; }
+  // Перевірка правильності заповнення поля #login
+  text_log = text_log.trim();
+  if (!text_log) { alert("Ви ввели некоректний логін!");
+                   return; }
+  // Перевірка заповнення поля #password_a
+  if (!text_pas_a) { alert("Ви не ввели пароль!");
+                     return; }
+  // Перевірка довжини паролю
+  if (text_pas_a.length < 6) { alert("Ви ввели закороткий пароль!" + "\n" +
+                                     "Мінімальна довжина паролю - 6 символів");
+                               return; }
+  // Перевірка заповнення поля #password_b
+  if (!text_pas_b) { alert("Ви не повторили пароль!");
+                     return; }
+  // Перевірка ідентичності паролів
+  if (text_pas_a !== text_pas_b) { alert("Паролі не збігаються!");
+                                   return; }
+  // Повідомлення про успішну реєстрацію
+  alert("Реєстрація завершилася успішно");
+}
+
+// Необхідні змінні
 let added_elements = 1;
 
 // Додавання нового елементу до списку
@@ -112,5 +147,35 @@ function change_justify_content() {
   justify_content_id += justify_content_id < 4 ? 1 : -4;
 }
 
+// Необхідні змінні
+let title_color_id = 1;
+let title_colors = [ "#F00",
+                     "#0F0",
+                     "#00F",
+                     "#FF0",
+                     "#F0F",
+                     "#0FF" ];
+
+// Зміна кольору фону заголовку
+function change_title_background() {
+  // Допоміжна константа
+  const colors = title_colors.length - 1;
+  // Шукаємо елемент по id
+  let title = document.getElementById("title");
+  // Змінюємо колір рамки
+  title.style.borderColor = title_colors[title_color_id];
+  // Допоміжна змінна
+  let alpha_color = title_colors[title_color_id] + "5";
+  // Змінюємо колір фону
+  title.style.backgroundColor = alpha_color;
+  // Збільшуємо лічильник
+  title_color_id += (title_color_id < colors) ? 1 : -colors;  
+}
+
+// .......................................................................
+
 // Додаємо прослуховувачі подій до кнопок
 add_flex_button_listener();
+
+// Змінюємо колір фону заголовку кожні 2 сек.
+setInterval(change_title_background, 3000);
