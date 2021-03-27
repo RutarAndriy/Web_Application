@@ -63,7 +63,7 @@ ul, ol {
 }
 
 #grid_1 {
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 
 #div_1 {
@@ -71,7 +71,7 @@ ul, ol {
   background-color: #0F05;
 }
 
-#div_2 {
+#div_2, #div_6 {
   color: white;
   border-color: #333;
   background-color: #3338;
@@ -93,15 +93,21 @@ ul, ol {
 }
 
 #flex_block {
+  /* Тип відображення: flex */
   display: flex;
+  /* Вирівнювання вздовж головної осі */
+  align-items: center;
+  /* Переносити елементи вниз, якщл вони не поміщаються у блоці */
+  flex-wrap: wrap;
+  /* Напрямок розміщення елементів (головна вісь) */
   flex-direction: row;
+  /* Відступи між елементами */
   justify-content: space-around;
 }
 
 #flex_block img {
   display: block;
   width: 48px;
-  height: 48px;
 }
 
 #flex_block img[alt="im_2"],
@@ -110,20 +116,25 @@ ul, ol {
 #flex_block img[alt="im_8"]{
   display: block;
   width: 72px;
-  height: 72px;
 }
 
 #title {
+  color: black;
   transition: border-color 2s,
               background-color 2s;
 }
 
-#title a{
-  color: black;
+#title_text {
+  display: inline;
   cursor: pointer;
-  text-decoration: none;
 }
 
-#title a:visited {
-  color: black;
+#div_6 {
+  margin-bottom: 2px;
+}
+
+#div_6 a, #div_6 a:visited {
+  color: white;
+  font-size: 1.3em;
+  text-decoration: none;
 }

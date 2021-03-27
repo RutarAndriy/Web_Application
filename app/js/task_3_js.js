@@ -20,13 +20,13 @@ function btn_3_press() {
 }
 
 // Очищення поля введення
-function clear_textfield_1() {
-  document.getElementById("field_1").value = "";
+function clear_spec_field_1() {
+  document.getElementById("spec_field_1").value = "";
 }
 
 // Очищення поля введення
-function clear_textfield_2() {
-  document.getElementById("field_2").value = "";
+function clear_spec_field_2() {
+  document.getElementById("spec_field_2").value = "";
 }
 
 // Переведення введеного тексту у верхній регістр
@@ -73,13 +73,15 @@ function btn_register_press() {
   alert("Реєстрація завершилася успішно");
 }
 
+// .......................................................................
+
 // Необхідні змінні
 let added_elements = 1;
 
 // Додавання нового елементу до списку
 function add_li() {
   // Пошук списку за id
-  let ul = document.getElementById("list_1");
+  let ul = document.getElementById("editable_list");
   // Створення нового елементу <li>
   let li = document.createElement("li");
   // Створення тексту для елементу <li>
@@ -95,42 +97,54 @@ function add_li() {
 // Видалення останнього елементу зі списку
 function remove_li() {
   // Пошук списку за id
-  let ul = document.getElementById("list_1");
+  let ul = document.getElementById("editable_list");
   // Отримання останнього дочірнього елемента
   let li = ul.lastChild;
   // Видалення останнього дочірнього елемента
   ul.removeChild(ul.lastChild);
 }
 
+// .......................................................................
+
 // Прослуховування кнопок управління блоком #flex_block
 function add_flex_button_listener() {
   // Шукаємо кнопки по їх id
   let direction = document.getElementById("flex_direction");
-  let justify   = document.getElementById("flex_justify");
+  let justify   = document.getElementById("justify-content");
+  let align     = document.getElementById("align-items");
   // Додаємо прослуховування події <onclick>
   direction.onclick = change_flex_direction;
   justify.onclick   = change_justify_content;
+  align.onclick     = change_align_items;
 }
 
+// .......................................................................
+
 // Необхідні змінні
-let flex_direction_id = 1;
+let flex_direction_id = 0;
 let flex_direction = [ "row",
                        "row-reverse",
                        "column",
                        "column-reverse" ];
 
 // Зміна властивості <flex-direction>
-function change_flex_direction() {
+function change_flex_direction (element) {
   // Шукаємо блок по id
   let block = document.getElementById("flex_block");
-  // Змінюємо властивість <flexDirection> 
-  block.style.flexDirection = flex_direction[flex_direction_id];
   // Збільшуємо лічильник
   flex_direction_id += flex_direction_id < 3 ? 1 : -3;
+  // Отримуємо нове значення властивості
+  let value = flex_direction[flex_direction_id];
+  // Змінюємо властивість <flex-direction> 
+  block.style.flexDirection = value;
+  // Змінюємо текст кнопки
+  element.target.innerHTML = `flex_direction: ${value}`;
 }
 
+// .......................................................................
+
 // Необхідні змінні
-let justify_content_id = 4;
+let justify_content_id = 3;
 let justify_content = [ "center",
                         "flex-start",
                         "flex-end",
@@ -138,14 +152,44 @@ let justify_content = [ "center",
                         "space-between" ];
 
 // Зміна властивості <justify-content>
-function change_justify_content() {
+function change_justify_content (element) {
   // Шукаємо блок по id
   let block = document.getElementById("flex_block");
-  // Змінюємо властивість <justify-content> 
-  block.style.justifyContent = justify_content[justify_content_id];
   // Збільшуємо лічильник
   justify_content_id += justify_content_id < 4 ? 1 : -4;
+  // Отримуємо нове значення властивості
+  let value = justify_content[justify_content_id];
+  // Змінюємо властивість <justify-content> 
+  block.style.justifyContent = value;
+  // Змінюємо текст кнопки
+  element.target.innerHTML = `justify_content: ${value}`;
 }
+
+// .......................................................................
+
+// Необхідні змінні
+let align_items_id = 0;
+let align_items = [ "center",
+                    "baseline",
+                    "flex-start",
+                    "flex-end",
+                    "stretch" ];
+
+// Зміна властивості <align_items>
+function change_align_items (element) {
+  // Шукаємо блок по id
+  let block = document.getElementById("flex_block");
+  // Збільшуємо лічильник
+  align_items_id += align_items_id < 4 ? 1 : -4;
+  // Отримуємо нове значення властивості
+  let value = align_items[align_items_id];
+  // Змінюємо властивість <align_items> 
+  block.style.alignItems = value;
+  // Змінюємо текст кнопки
+  element.target.innerHTML = `align_items: ${value}`;
+}
+
+// .......................................................................
 
 // Необхідні змінні
 let title_color_id = 1;
