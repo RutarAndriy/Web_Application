@@ -130,17 +130,45 @@
     <!-- Блок <div_4> -->
     <div class="block_n" id="div_4">
 
-      <div>
+      <form>
 
-        <p>Елемент №1 { #g .he &lt;f&gt; }</p>
-        <p>Елемент №2 { #g .he &lt;f&gt; }</p>
-        <p>Елемент №3 { #g .he &lt;f&gt; }</p>
-        <p>Елемент №4 { #g .he &lt;f&gt; }</p>
-        <p>Елемент №5 { #g .he &lt;f&gt; }</p>
-        <p>Елемент №6 { #g .he &lt;f&gt; }</p>
-        <p>Елемент №7 { #g .he &lt;f&gt; }</p>
-
-      </div>
+        <input type="checkbox" name="cb_1" id="cb1" class="test_a">
+        <label for="cb_1">Елемент №1 { #cb1 .test_a }</label>
+        <br>
+        <input type="checkbox" name="cb_2" id="cb2" class="test_b" custom_atr="39">
+        <label for="cb_2">Елемент №2 { #cb2 .test_b [custom_atr="39"] }</label>
+        <br>
+        <input type="checkbox" name="cb_3" id="cb3" class="test_c">
+        <label for="cb_3">Елемент №3 { #cb3 .test_c }</label>
+        <br>
+        <input type="checkbox" name="cb_4" id="cb4" class="test_a test_b" custom_atr="17">
+        <label for="cb_4">Елемент №4 { #cb4 .test_a .test_b [custom_atr="17"] }</label>
+        <br>
+        <input type="checkbox" name="cb_5" id="cb5" class="test_b test_c">
+        <label for="cb_5">Елемент №5 { #cb5 .test_b .test_c }</label>
+        <br>
+        <input type="checkbox" name="cb_6" id="cb6" class="test_z" custom_atr="-13">
+        <label for="cb_6">Елемент №6 { #cb6 .test_z [custom_atr="-13"] }</label>
+        <br>
+        <input type="checkbox" name="cb_7" id="cb7" class="test_b test_z">
+        <label for="cb_7">Елемент №7 { #cb7 .test_b .test_z }</label>
+        <br>
+        <input type="checkbox" name="cb_8" id="cb8" custom_atr="196">
+        <label for="cb_8">Елемент №8 { #cb8 [custom_atr="196"] }</label>
+        <br>
+        <input type="checkbox" name="cb_9" id="cb9" class="test_a" custom_atr="22">
+        <label for="cb_9">Елемент №9 { #cb9 .test_a [custom_atr="22"] }</label>
+        <hr>
+        <input type="button" onclick="check_condition_1()" value="Вибрати елементи, які мають клас <test_b>">
+        <br>
+        <input type="button" onclick="check_condition_2()" value="Вибрати елементи, які мають id #cb3 або #cb7">
+        <br>
+        <input type="button" onclick="check_condition_3()" value="Вибрати елементи, які не мають класу <test_z>">
+        <br>
+        <input type="button" onclick="check_condition_4()" value="Вибрати елементи, які мають атрибут [custom_atr], значення якого є >= 25">
+        <br>
+        <input type="button" onclick="unselect_all_elements()" value="Скасувати вибір елементів">
+      </form>
 
 
     </div>

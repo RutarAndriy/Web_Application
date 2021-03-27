@@ -87,6 +87,10 @@ ul, ol {
   background-color: #F0F5;
 }
 
+#div_4 form {
+  text-align: left;
+}
+
 #div_5 {
   border-color: #FF0;
   background-color: #FF05;

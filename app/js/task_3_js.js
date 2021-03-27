@@ -128,7 +128,7 @@ let flex_direction = [ "row",
                        "column-reverse" ];
 
 // Зміна властивості <flex-direction>
-function change_flex_direction (element) {
+function change_flex_direction (event) {
   // Шукаємо блок по id
   let block = document.getElementById("flex_block");
   // Збільшуємо лічильник
@@ -138,7 +138,7 @@ function change_flex_direction (element) {
   // Змінюємо властивість <flex-direction> 
   block.style.flexDirection = value;
   // Змінюємо текст кнопки
-  element.target.innerHTML = `flex_direction: ${value}`;
+  event.target.innerHTML = `flex_direction: ${value}`;
 }
 
 // .......................................................................
@@ -152,7 +152,7 @@ let justify_content = [ "center",
                         "space-between" ];
 
 // Зміна властивості <justify-content>
-function change_justify_content (element) {
+function change_justify_content (event) {
   // Шукаємо блок по id
   let block = document.getElementById("flex_block");
   // Збільшуємо лічильник
@@ -162,7 +162,7 @@ function change_justify_content (element) {
   // Змінюємо властивість <justify-content> 
   block.style.justifyContent = value;
   // Змінюємо текст кнопки
-  element.target.innerHTML = `justify_content: ${value}`;
+  event.target.innerHTML = `justify_content: ${value}`;
 }
 
 // .......................................................................
@@ -176,7 +176,7 @@ let align_items = [ "center",
                     "stretch" ];
 
 // Зміна властивості <align_items>
-function change_align_items (element) {
+function change_align_items (event) {
   // Шукаємо блок по id
   let block = document.getElementById("flex_block");
   // Збільшуємо лічильник
@@ -186,7 +186,7 @@ function change_align_items (element) {
   // Змінюємо властивість <align_items> 
   block.style.alignItems = value;
   // Змінюємо текст кнопки
-  element.target.innerHTML = `align_items: ${value}`;
+  event.target.innerHTML = `align_items: ${value}`;
 }
 
 // .......................................................................
@@ -214,6 +214,67 @@ function change_title_background() {
   title.style.backgroundColor = alpha_color;
   // Збільшуємо лічильник
   title_color_id += (title_color_id < colors) ? 1 : -colors;  
+}
+
+// .......................................................................
+
+// Позначаємо елементи, які задовільняють умову №1
+function check_condition_1() {
+  select_elements($("input.test_b"));
+}
+
+// Позначаємо елементи, які задовільняють умову №2
+function check_condition_2() {
+  select_elements($("#cb3, #cb7"));
+}
+
+// Позначаємо елементи, які задовільняють умову №3
+function check_condition_3() {
+  select_elements($("#div_4 input[type='checkbox']")
+                 .not(".test_z"));
+}
+
+// Позначаємо елементи, які задовільняють умову №4
+function check_condition_4() {
+  // Знімаємо позначки з усіх елементів
+  unselect_all_elements();
+  // Результат пошуку
+  let result = $("[custom_atr]");
+  // Допоміжний масив
+  let array = [];
+  // Перебираємо знайдені елементи
+  for (let z = 0; z < result.length; z++) {
+    // Отримуємо елемент
+    let element = result.get(z);
+    // Отримуємо значення атрибуту
+    let atr = Number($(element).attr("custom_atr"));
+    // Виконуємо перевірку значення атрибуту
+    if (atr >= 25) { $(element).prop('checked', true); }
+  }
+}
+
+// .......................................................................
+
+// Позначаємо необхідні елементи
+function select_elements (elements) {
+  // Знімаємо позначки з усіх елементів
+  unselect_all_elements();
+  // Позначаємо необхідні елементи  
+  for (let z = 0; z < elements.length; z++) {
+    let element = elements.get(z);
+    $(element).prop('checked', true);
+  }
+}
+
+// Знімаємо позначки з усіх елементів
+function unselect_all_elements() {
+  // Отримуємо усі елементи типу <checkbox>
+  let result = $("#div_4 input[type='checkbox']");
+  // Знімаємо позначки з усіх елементів
+  for (let z = 0; z < result.length; z++) {
+    let element = result.get(z);
+    $(element).prop('checked', false);
+  }
 }
 
 // .......................................................................
