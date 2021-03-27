@@ -63,7 +63,7 @@ const css_opt = { level: { 1: { specialComments: 0 } } };
 
 // Функція обробки результату публікації сайту на GitHub
 const deploy_result = function (err) {
-                          if (true) { console.log(`Deploy Error: ${err}`); }
+                          if (err) { console.log(`Deploy Error: ${err}`); }
                       };
 
 // ...............................................................................................
