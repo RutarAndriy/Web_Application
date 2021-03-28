@@ -85,7 +85,7 @@ function html() {
           .pipe(html_min                   // Стискаємо готові html файли
               ({ collapseWhitespace: true,
                  removeComments: true }))
-          .pipe(gulp_if(log, debug(opt)))  // Відобразити список оброблюваних файлів
+          .pipe(gulp_if(log, debug(opt)))  // Відображаємо список оброблюваних файлів
           .pipe(dest("build/"));           // Переміщуємо у папку build/ 
 }
 
@@ -94,7 +94,7 @@ function css() {
     return src("app/css/*.css",           // Беремо файли з розширенням css із папки app/css/
                { base: "app" })           // Задаємо параметр base, щоб зберегти вложеність файлів
           .pipe(newer("build/"))          // Відфільтровуємо лише змінені файли
-          .pipe(gulp_if(log, debug(opt))) // Відобразити список оброблюваних файлів
+          .pipe(gulp_if(log, debug(opt))) // Відображаємо список оброблюваних файлів
           .pipe(clean_css(css_opt))       // Стискаємо готові css файли
           .pipe(dest("build/"))           // Переміщуємо у папку build/
           .pipe(browser_sync.stream());   // Оновлюємо стилі без перезавантаження сторінки
@@ -104,7 +104,7 @@ function css() {
 function preprocessCss() {
     return src(`app/${use_preprocessor}` + // Беремо файли заданого препроцесора css із відповідної папки
                `/*.${use_preprocessor}`)  
-          .pipe(gulp_if(log, debug(opt)))  // Відобразити список оброблюваних файлів
+          .pipe(gulp_if(log, debug(opt)))  // Відображаємо список оброблюваних файлів
           .pipe(eval(css_preprocessor)())  // Компілюємо формат препросесора у css
           .pipe(clean_css(css_opt))        // Стискаємо готові css файли
           .pipe(dest("build/css/"))        // Переміщуємо у папку build/css/
@@ -117,7 +117,7 @@ function js() {
                { base: "app" })           // Задаємо параметр base, щоб зберегти вложеність файлів
           .pipe(newer("build/"))          // Відфільтровуємо лише змінені файли
           .pipe(terser())                 // Стискаємо готові js файли
-          .pipe(gulp_if(log, debug(opt))) // Відобразити список оброблюваних файлів
+          .pipe(gulp_if(log, debug(opt))) // Відображаємо список оброблюваних файлів
           .pipe(dest("build/"));          // Переміщуємо у папку build/
 }
 
