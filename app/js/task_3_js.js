@@ -371,7 +371,7 @@ function start_animation() {
     break;
   }
   // Збільшуємо індекс анімації
-  animation_id += animation_id < 5 ? 1 : -5;
+  animation_id += animation_id < 4 ? 1 : -4;
 }
 
 // .......................................................................
