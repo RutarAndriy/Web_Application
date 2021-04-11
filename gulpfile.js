@@ -121,14 +121,24 @@ function js() {
           .pipe(dest("build/"));          // Переміщуємо у папку build/
 }
 
+// Обробляємо txt файли
+function txt() {
+    return src("app/data/**/*.txt",       // Беремо файли з розширенням txt із папки app/data/
+               { base: "app" })           // Задаємо параметр base, щоб зберегти вложеність файлів
+          .pipe(newer("build/"))          // Відфільтровуємо лише змінені файли
+          .pipe(gulp_if(log, debug(opt))) // Відображаємо список оброблюваних файлів
+          .pipe(dest("build/"));          // Переміщуємо у папку build/
+}
+
 // Обробляємо файли зображень
 function img() {
-    return src("app/img/**/*.{png,jpg,jpeg,gif}", // Беремо файли з розширеннями png, jpg, jpeg, gif
-               { base: "app" })                   // Задаємо параметр base, щоб зберегти вложеність файлів
-          .pipe(newer("build/"))                  // Відфільтровуємо лише змінені файли
+    return src(["app/img/**/*.{png,jpg,jpeg,gif}",
+                "app/data/**/*.{png,jpg,jpeg,gif}"], // Беремо файли з розширеннями png, jpg, jpeg, gif
+               { base: "app" })                      // Задаємо параметр base, щоб зберегти вложеність файлів
+          .pipe(newer("build/"))                     // Відфільтровуємо лише змінені файли
           .pipe(image_min({ verbose: log,
-                            silent: !log }))      // Стискаємо зображення
-          .pipe(dest("build/"));                  // Переміщуємо у папку build/
+                            silent: !log }))         // Стискаємо зображення
+          .pipe(dest("build/"));                     // Переміщуємо у папку build/
 }
 
 // Очищуємо папку зібраного проекту
@@ -155,6 +165,10 @@ function watchForFiles() {
     watch("app/js/*.js")
    .on("all", series(js, browser_sync.reload));
 
+    // Слідкуємо за змінами txt файлів
+    watch("app/data/**/*.txt")
+   .on("all", series(txt, browser_sync.reload));
+
     // Слідкуємо за змінами файлів зображень
     watch("app/img/**/*")
    .on("all", series(img, browser_sync.reload));
@@ -172,7 +186,7 @@ function deployOnGitHub() {
 // ...............................................................................................
 
 // Збирання проекту
-exports.build = series(cleanBuild, html, css, preprocessCss, js, img);
+exports.build = series(cleanBuild, html, css, preprocessCss, js, txt, img);
 
 // Завдання за замовчуванням
 exports.default = parallel(series(exports.build, browserSync), watchForFiles);
