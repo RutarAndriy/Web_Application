@@ -1,6 +1,6 @@
 // Необхідні змінні
 let index = 0;
-let paintings_list;
+let paintings;
 
 // Обробка бокового меню
 function click_on_menu (object) {
@@ -40,15 +40,47 @@ function click_on_menu (object) {
       break;
 
       // Відобразити випадкову картину
-      case "menu_random": console.log("Random"); break;
+      case "menu_random":
+         click_on_painting(-1);
+      break;
    }
 }
 
 // Обробка вибору картини
 function click_on_painting (object) {
 
-   console.log(`${$(object).attr("data")}`);
+   let element;
 
+   if (object === -1)
+      { element = paintings[Math.floor(Math.random() * paintings.length)]; }
+   else
+      { element = $(object).attr("data"); }
+   
+   $.get(`../data/text/${element}.txt`, (data) => {
+
+      let item_data = data.split("\n");
+
+      let block =
+        `<div class="modal-header border-secondary">
+            <div class="d-flex flex-column ms-3">
+               <h3 class="m-0">${item_data[0]}</h3>
+               <span>Автор: ${item_data[1]}</span>
+            </div>
+            <button type="button" class="btn-close bg-primary me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         
+         <div class="modal-body">
+            <img src="../data/img/${item_data[2]}.jpg" class="w-100" alt="painting">
+         </div>
+         
+         <div class="modal-footer border-secondary">
+            <h5>${item_data[3]}</h5>
+         </div>`;
+
+      $("#modal_content").html(block);
+      $('#modal').modal('show');
+      
+   });
 }
 
 // Підвантаження нових даних
@@ -57,10 +89,10 @@ function load_more_paintings (count) {
    let id = 0;
    while (id < count) {
 
-      if (index >= paintings_list.length) { disable_load_button();
-                                            return; }
+      if (index >= paintings.length) { disable_load_button();
+                                       return; }
 
-      $.get(`../data/text/${paintings_list[index]}.txt`, (data) => {
+      $.get(`../data/text/${paintings[index]}.txt`, (data) => {
 
          let item_data = data.split("\n");
 
@@ -86,12 +118,20 @@ function disable_load_button() {
    $("#load").addClass("disabled");
 }
 
+// Реагуємо на закривання модального вікна
+$("#modal").on("hidden.bs.modal", () => {
+   $("li.nav-item").removeClass("active");
+   $("#menu_painting").addClass("active");
+   $("#div_task").attr("hidden", "");
+   $("#div_galery").removeAttr("hidden");
+});
+
 // Завантаження початкових даних
 $(document).ready(() => {    
    setTimeout(() => {
       $.get("../data/data.txt", (data) => {
-         paintings_list = data.split("\n");
-         paintings_list.splice(paintings_list.length - 1, 1);
+         paintings = data.split("\n");
+         paintings.splice(paintings.length - 1, 1);
          load_more_paintings(6);
       });
    }, 300);
